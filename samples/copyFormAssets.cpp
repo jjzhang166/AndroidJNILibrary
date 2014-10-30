@@ -8,7 +8,7 @@
  * @param[in] jfileName assets中的文件名。
  * @param[in] joutPath 输出路径。
  */
-void copyFormAssets(jstring jfileName, jstring joutPath) {
+void copyFormAssets(jobject obj, jstring jfileName, jstring joutPath) {
 	// 上下文。
 	JContext context;
 	context.InitJObject(obj);
