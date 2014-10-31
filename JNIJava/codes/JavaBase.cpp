@@ -84,14 +84,14 @@ JString* JObject::toString() {
 }
 
 // 调用构造方法。
-void JObject::CallConstructorMethod(IN const char* className) {
-	CallConstructorMethod(className, "()V");
+void JObject::CallConstructorMethod(IN const char* classDesc) {
+	CallConstructorMethod(classDesc, "()V");
 }
 
 // 调用构造方法。
-void JObject::CallConstructorMethod(IN const char* className, IN const char* sig, IN ...) {
+void JObject::CallConstructorMethod(IN const char* classDesc, IN const char* sig, IN ...) {
 	JNIEnv* env = mJNIEnvGetter.get();
-	jclass clazz = env->FindClass(className);
+	jclass clazz = env->FindClass(classDesc);
 	jmethodID id = env->GetMethodID(clazz, "<init>", sig);
 
 	va_list ap;
@@ -123,6 +123,30 @@ jboolean JObject::CallBooleanMethod(IN const char* methodName, IN const char* si
 	va_list ap;
 	va_start(ap, sig);
 	jboolean result = env->CallBooleanMethodV(mJObject, id, ap);
+	va_end(ap);
+	return result;
+}
+
+jbyte JObject::CallByteMethod(IN const char* methodName, IN const char* sig, IN ...) {
+	JNIEnv* env = mJNIEnvGetter.get();
+
+	jmethodID id = GetMethodID_(env, mJObject, methodName, sig);
+
+	va_list ap;
+	va_start(ap, sig);
+	jbyte result = env->CallByteMethodV(mJObject, id, ap);
+	va_end(ap);
+	return result;
+}
+
+jshort JObject::CallShortMethod(IN const char* methodName, IN const char* sig, IN ...) {
+	JNIEnv* env = mJNIEnvGetter.get();
+
+	jmethodID id = GetMethodID_(env, mJObject, methodName, sig);
+
+	va_list ap;
+	va_start(ap, sig);
+	jshort result = env->CallShortMethodV(mJObject, id, ap);
 	va_end(ap);
 	return result;
 }

@@ -12,6 +12,7 @@ LOCAL_C_INCLUDES := ../utils
 #LOCAL_SRC_FILES := $(wildcard $(LOCAL_PATH)/codes/*.cpp)
 #LOCAL_SRC_FILES += $(wildcard $(LOCAL_PATH)/codes/*.c)
 LOCAL_SRC_FILES := $(LOCAL_PATH)/codes/JavaBase.cpp \
+				   $(LOCAL_PATH)/codes/JavaNumber.cpp \
 				   $(LOCAL_PATH)/codes/JavaString.cpp \
 				   $(LOCAL_PATH)/codes/JavaIO.cpp \
 				   $(LOCAL_PATH)/codes/JNIReflect.cpp \

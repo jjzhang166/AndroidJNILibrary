@@ -53,20 +53,22 @@ protected:
 
 	/**
 	 * 调用构造方法。
-	 * @param[in] className 类名。
+	 * @param[in] classDesc 类名。
 	 */
-	void CallConstructorMethod(IN const char* className);
+	void CallConstructorMethod(IN const char* classDesc);
 
 	/**
 	 * 调用构造方法。
-	 * @param[in] className 类名。
+	 * @param[in] classDesc 类名。
 	 * @param[in] sig 方法签名。
 	 * @param[in] ... 方法参数。
 	 */
-	void CallConstructorMethod(IN const char* className, IN const char* sig, IN ...);
+	void CallConstructorMethod(IN const char* classDesc, IN const char* sig, IN ...);
 
 	void CallVoidMethod(IN const char* methodName, IN const char* sig, IN ...);
 	jboolean CallBooleanMethod(IN const char* methodName, IN const char* sig, IN ...);
+	jbyte CallByteMethod(IN const char* methodName, IN const char* sig, IN ...);
+	jshort CallShortMethod(IN const char* methodName, IN const char* sig, IN ...);
 	jchar CallCharMethod(IN const char* methodName, IN const char* sig, IN ...);
 	jint CallIntMethod(IN const char* methodName, IN const char* sig, IN ...);
 	jlong CallLongMethod(IN const char* methodName, IN const char* sig, IN ...);
