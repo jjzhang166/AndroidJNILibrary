@@ -1,6 +1,9 @@
 ﻿#ifndef _SMART_POINT_H_
 #define _SMART_POINT_H_
 
+#include <stddef.h>
+#include <stdint.h>
+
 //////////////////////////////////////////////////////////////////////////
 // 
 

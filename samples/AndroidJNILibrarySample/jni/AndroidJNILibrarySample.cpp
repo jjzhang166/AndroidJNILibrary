@@ -1,4 +1,7 @@
 #include <jni.h>
+#include <JNIJava/JavaBase.h>
+#include <JNIJava/AndroidContent.h>
+#include <utils/SmartPoint.h>
 
 
 /**
@@ -41,7 +44,7 @@ void copyFormAssets(JNIEnv *env, jobject thiz, jstring jfileName, jstring joutPa
 	// 写文件。
 	jint length;
 	while ((length = is->read(buffer)) > 0) {
-		os.write(buffer, 0, 1024);
+		os.write(buffer, 0, length);
 	}
 
 	is->close();
@@ -50,11 +53,8 @@ void copyFormAssets(JNIEnv *env, jobject thiz, jstring jfileName, jstring joutPa
 
 const char* g_ClassName = "com/buwai/androidjnilibrarysample/MainActivity";
 
-static const JNINativeMethod gMethods[] = { //定义批量注册的数组，是注册的关键部
-	{ "JNITest", "(Ljava/lang/String;)I", (void*) JNITest }, 
-	{ "copyFormAssets", "(Ljava/lang/String;Ljava/lang/String;)V", (void*)copyFormAssets }, 
-	{ "hookFileClass", "()V", (void*)hookFileClass }, 
-	{ "template_test", "(I)V", (void*)template_test }
+static const JNINativeMethod gMethods[] = {
+	{ "copyFormAssets", "(Ljava/lang/String;Ljava/lang/String;)V", (void*)copyFormAssets }
 };
 
 extern "C" JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
@@ -66,16 +66,13 @@ extern "C" JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
 	}
 
 	jclass clazz;
-	//这里可以找到要注册的类，前提是这个类已经加载到java虚拟机中。 这里说明，动态库和有native方法的类之间，没有任何对应关系。
 	clazz = env->FindClass(g_ClassName);
 	if (clazz == NULL) {
 		return -1;
 	}
 
 	if (env->RegisterNatives(clazz, gMethods,
-		sizeof(gMethods) / sizeof(gMethods[0])) != JNI_OK) //这里就是关键了，把本地函数和一个java类方法关联起来。不管之前是否关联过，一律把之前的替换掉！
-	{
-		printf("register native method failed!\n");
+		sizeof(gMethods) / sizeof(gMethods[0])) != JNI_OK) {
 		return -1;
 	}
 	result = JNI_VERSION_1_4;

@@ -1,6 +1,8 @@
 ﻿#ifndef _JAVA_BASE_H_
 #define _JAVA_BASE_H_
 
+#include <jni.h>
+#include <stddef.h>
 #include <typeinfo>
 #include "../utils/CommDef.h"
 #include "JNIReflect.h"

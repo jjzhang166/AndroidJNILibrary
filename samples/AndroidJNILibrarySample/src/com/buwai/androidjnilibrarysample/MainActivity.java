@@ -9,6 +9,8 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 	
 	private Button mbtnCopyFileFromAssets;
+	
+	private native void copyFormAssets(String fileName, String outPath);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +21,8 @@ public class MainActivity extends Activity {
 		mbtnCopyFileFromAssets.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
-			} 
+				copyFormAssets("test.txt", "/data/data/" + getPackageName() + "/my_files/test.txt");
+			}
 		});
 	}
 
@@ -29,5 +31,9 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	static {
+		System.loadLibrary("AndroidJNILibrarySample");
 	}
 }
