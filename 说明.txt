@@ -1,0 +1,1 @@
+﻿AndroidJNILibrary项目的目的是为了使Android NDK编程更加的简单，可以像Java语言一样容易编写Android NDK代码。
